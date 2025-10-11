@@ -11,10 +11,12 @@ if (loginForm) {
 
     try {
       await login(email, password);
-      alert("Login successful!");
-      window.location.href = "/index.html"; 
+      window.location.href = "/feed.html"; 
     } catch (error) {
-      alert("Login failed. Check your email and password.");
+      const errorMsg = document.createElement("p");
+      errorMsg.style.color = "red";
+      errorMsg.textContent = "Login failed. Check your email and password.";
+      loginForm.appendChild(errorMsg);
       console.error(error);
     }
   });
@@ -32,10 +34,12 @@ if (registerForm) {
 
     try {
       await register(name, email, password);
-      alert("Registration successful! You can now log in.");
       window.location.href = "/login.html"; 
     } catch (error) {
-      alert("Registration failed. Try again.");
+      const errorMsg = document.createElement("p");
+      errorMsg.style.color = "red";
+      errorMsg.textContent = "Registration failed. Try again.";
+      registerForm.appendChild(errorMsg);
       console.error(error);
     }
   });
