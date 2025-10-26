@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Edit Post</title>
+  <link rel="stylesheet" href="src/css/style.css">
+  <link rel="stylesheet" href="src/css/post.css">
+</head>
+<body>
+  <header>
+    <a href="/feed.html" class="logo">MySocial</a>
+    <nav>
+      <a href="/feed.html">Home</a>
+      <a href="/profile.html">Profile</a>
+      <a href="/myPosts.html">Post</a>
+    </nav>
+    <nav class="right-nav">
+      <a href="/account/login.html" id="logoutLink">Logout</a>
+    </nav>
+  </header>
+  <div class="edit-container">
+    <form id="editForm" class="edit-form">
+      <h1>Edit Your Post</h1>
+      <label for="title">Title</label>
+      <input type="text" id="title" name="title" required>
+      <label for="body">Content</label>
+      <textarea id="body" name="body" required></textarea>
+      <label for="image">Image URL (optional)</label>
+      <input type="url" id="image" name="image" placeholder="https://...">
+      <div class="edit-actions">
+        <button type="submit" class="save-btn">Save Changes</button>
+        <button type="button" class="cancel-btn" id="cancelBtn">Cancel</button>
+      </div>
+    </form>
+  </div>
+  <script type="module" src="/src/post/editPost.ts"></script>
+</body>
+</html>
