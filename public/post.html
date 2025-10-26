@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>View Single Post</title>
+    <link rel="stylesheet" href="/src/css/style.css">
+    <link rel="stylesheet" href="/src/css/feed.css">
+    <link rel="stylesheet" href="/src/css/post.css">
+  </head>
+  <body>
+    <header>
+      <a href="/feed.html" class="logo">MySocial</a>
+      <nav>
+        <a href="/feed.html">Home</a>
+        <a href="/profile.html">Profile</a>
+        <a href="/myPosts.html">Post</a>
+      </nav>
+      <nav class="right-nav">
+        <a href="/account/login.html" id="logoutLink">Logout</a>
+      </nav>
+    </header>
+    <main class="single-post">
+      <div id="postContainer">Loading post...</div>
+      <div id="postActions" class="hidden">
+        <button id="editBtn">Edit</button>
+        <button id="deleteBtn">Delete</button>
+      </div>
+    </main>
+    <script type="module" src="/src/post/singlePost.ts"></script>
+  </body>
+</html>
