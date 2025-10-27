@@ -3,11 +3,13 @@ import { saveToken, saveUser } from "../utils/storage";
 
 interface LoginResponse {
   data?: {
+    id: string;        
     accessToken: string;
     name: string;
     email: string;
   };
   accessToken?: string;
+  id?: string;        
   name?: string;
   email?: string;
 }
@@ -33,6 +35,7 @@ export async function login(email: string, password: string) {
   const token = data.accessToken || data.data?.accessToken;
   const name = data.name || data.data?.name;
   const emailRes = data.email || data.data?.email;
+  const id = data.id || data.data?.id; 
 
   if (!token) {
     console.error("Login succeeded but no token returned:", data);
@@ -40,7 +43,7 @@ export async function login(email: string, password: string) {
   }
 
   saveToken(token);
-  saveUser({ name: name || "Unknown", email: emailRes || email });
+  saveUser({ id: id || "unknown", name: name || "Unknown", email: emailRes || email });
 }
 
 // --- REGISTER ---
