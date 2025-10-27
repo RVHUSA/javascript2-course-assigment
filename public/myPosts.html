@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Posts</title>
+  <link rel="stylesheet" href="/src/css/style.css">
+  <link rel="stylesheet" href="/src/css/feed.css">
+  <link rel="stylesheet" href="/src/css/post.css">
+</head>
+<body>
+  <header>
+    <a href="/feed.html" class="logo">MySocial</a>
+    <nav>
+      <a href="/feed.html">Home</a>
+      <a href="/profile.html">Profile</a>
+      <a href="/myPosts.html">Post</a>
+    </nav>
+    <nav class="right-nav">
+      <a href="/account/login.html" id="logoutLink">Logout</a>
+    </nav>
+  </header>
+  <main>
+    <form id="postForm">
+      <input type="text" id="title" placeholder="Post title" required>
+      <textarea id="body" placeholder="Write something..." required></textarea>
+      <input type="text" id="imageUrl" placeholder="Image URL (optional)">
+      <button type="submit">Create Post</button>
+    </form>
+    <div id="feedContainer" class="feed-container"></div>
+  </main>
+  <script type="module" src="/src/post/myPosts.ts"></script>
+</body>
+</html>
