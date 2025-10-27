@@ -41,6 +41,16 @@ main {
   color: #999;
 }
 
+
+.post-card img {
+  max-width: 100%;      
+  height: auto;         
+  border-radius: 8px;   
+  margin-top: 0.5rem;    
+  object-fit: cover;     
+}
+
+
 /* Post Form */
 #postForm {
   background-color: #fff;
@@ -90,7 +100,4 @@ main {
     padding: 1rem;
   }
 
-  #postForm, .feed-container {
-    max-width: 100%;
-  }
 }
