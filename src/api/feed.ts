@@ -19,7 +19,6 @@ export async function fetchAllPosts(): Promise<Post[]> {
   }
 
   const data = await response.json();
-
   return Array.isArray(data.data) ? data.data : [];
 }
 
@@ -95,15 +94,14 @@ export function renderPosts(posts: Post[], container: HTMLDivElement): void {
     card.dataset.postId = post.id;
 
     const ownerName =
-      (post as any).owner?.name ||
-      (post as any).author?.name ||
-      "Unknown";
+      (post as any).owner?.name || (post as any).author?.name || "Unknown";
 
     const createdDate = post.created ?? post.published ?? "";
     const mediaUrl = (post as any).media?.url;
 
+    // --- HTML for card ---
     card.innerHTML = `
-      <a href="/post.html?id=${post.id}" class="post-link">
+      <div class="post-link">
         <h2>${post.title}</h2>
         ${
           mediaUrl
@@ -111,22 +109,31 @@ export function renderPosts(posts: Post[], container: HTMLDivElement): void {
             : ""
         }
         <p>${post.body}</p>
-      </a>
-      <small>By <strong>${ownerName}</strong></small><br>
-      <small>${
-        createdDate
-          ? `Created: ${new Date(createdDate).toLocaleString()}`
-          : ""
-      }</small>
+      </div>
+      <small>
+        By <a href="/profile.html?name=${ownerName}" class="author-link">${ownerName}</a>
+      </small><br>
+      <small>
+        ${
+          createdDate
+            ? `Created: ${new Date(createdDate).toLocaleString()}`
+            : ""
+        }
+      </small>
     `;
 
-    // Delete and edit for owner
+    card.addEventListener("click", (event) => {
+      const target = event.target as HTMLElement;
+      if (target.closest(".author-link")) return;
+      window.location.href = `/post.html?id=${post.id}`;
+    });
+
     if (currentUser && (post as any).owner?.id === currentUser.id) {
       const actions = document.createElement("div");
       actions.className = "post-actions";
       actions.innerHTML = `
-        <button class="edit-btn" data-id="${post.id}"> Edit</button>
-        <button class="delete-btn" data-id="${post.id}"> Delete</button>
+        <button class="edit-btn" data-id="${post.id}">Edit</button>
+        <button class="delete-btn" data-id="${post.id}">Delete</button>
       `;
       card.appendChild(actions);
     }
@@ -134,4 +141,3 @@ export function renderPosts(posts: Post[], container: HTMLDivElement): void {
     container.appendChild(card);
   });
 }
-
