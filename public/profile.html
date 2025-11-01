@@ -5,8 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>My Profile</title>
   <link rel="stylesheet" href="/src/css/style.css">
-  <link rel="stylesheet" href="/src/css/feed.css">
-  <link rel="stylesheet" href="/src/css/post.css">
+  <link rel="stylesheet" href="/src/css/profile.css">
 </head>
 <body>
   <header>
@@ -20,5 +19,22 @@
       <a href="/account/login.html" id="logoutLink">Logout</a>
     </nav>
   </header>
+  <main>
+    <div class="profile-container">
+      <div class="profile-header">
+        <img id="profileAvatar" alt="User Avatar" class="avatar" />
+        <div>
+          <h2 id="profileName"></h2>
+          <p id="profileBio"></p>      
+          <button id="followBtn" class="follow-btn"></button>
+        </div>
+      </div>
+      <section class="user-posts">
+        <h3>User Posts</h3>
+        <div id="userPostsContainer" class="feed-container"></div>
+      </section>
+    </div>
+  </main>
+  <script type="module" src="/src/api/profile.ts"></script>
 </body>
 </html>
