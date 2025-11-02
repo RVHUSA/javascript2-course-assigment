@@ -1,4 +1,4 @@
-# 🌐 MySocial — JavaScript 2 Course Assignment
+# MySocial — JavaScript 2 Course Assignment
 
 This project is my submission for the **JavaScript 2 Course Assignment** at Noroff.  
 It is a front-end application for a small **social media platform**, built using **TypeScript**, **ES6 modules**, and the **Noroff Social API**.
