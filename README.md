@@ -17,6 +17,7 @@ Users can register, log in, view all posts, create, edit and delete their own po
 ## ✨ Features implemented
 
 | Feature | Description |
+|----------|--------------|
 | 🧍 Register | Users can register a new account via the API |
 | 🔐 Login | Users can log in and store their auth token in localStorage |
 | 📰 View all posts | Displays all posts on the main feed page |
