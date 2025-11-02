@@ -57,7 +57,7 @@ To run this project on your own computer:
 
 - **Language:** TypeScript  
 - **Modules:** ES6 Modules (`import` / `export`)  
-- **API:** [Noroff Social API v2](https://v2.api.noroff.dev/)
+- **API:** [Noroff Social API v2](https://docs.noroff.dev/docs/v2)
 - **Styling:** Custom CSS (no external frameworks)  
 - **Build tool:** [Vite](https://vitejs.dev/)  
 - **Deployment:** Netlify  
