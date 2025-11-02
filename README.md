@@ -44,10 +44,12 @@ To run this project on your own computer:
 
 3. Open your terminal and run the following commands:
 
-   cd javascript2-course-assigment
+```
+cd javascript2-course-assigment
    npm install
    npm run dev
-
+```
+   
 4. When the development server starts, open the local URL shown in your terminal (for example `http://localhost:5173`) in your browser.
 
 
