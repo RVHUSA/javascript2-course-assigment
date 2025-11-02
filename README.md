@@ -10,6 +10,7 @@ Users can register, log in, view all posts, create, edit and delete their own po
 ## 🚀 Live Demo
 
 🔗 **Deployed site:** https://mysocial.netlify.app 
+
 💻 **GitHub repository:** https://github.com/RVHUSA/javascript2-course-assigment.git
 
 ---
@@ -52,6 +53,7 @@ To run this project on your own computer:
    
 4. When the development server starts, open the local URL shown in your terminal (for example `http://localhost:5173`) in your browser.
 
+---
 
 ## 🧩 Technical details
 
