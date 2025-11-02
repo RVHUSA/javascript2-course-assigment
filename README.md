@@ -45,7 +45,7 @@ To run this project on your own computer:
 3. Open your terminal and run the following commands:
 
 ```
-cd javascript2-course-assigment
+   cd javascript2-course-assigment
    npm install
    npm run dev
 ```
