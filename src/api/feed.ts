@@ -2,7 +2,12 @@ import { SOCIAL_URL, API_KEY } from "../api/config";
 import type { Post, User } from "../types/post";
 import { getToken, getUser } from "../utils/storage";
 
-// --- FETCH ALL POSTS ---
+/**
+ * Fetches all posts from the API.
+ * @async
+ * @returns {Promise<Post[]>} A list of all posts from the API.
+ * @throws {Error} Throws an error if no token is found or fetching fails.
+ */
 export async function fetchAllPosts(): Promise<Post[]> {
   const token = getToken();
   if (!token) throw new Error("No auth token found. Please log in.");
@@ -22,7 +27,15 @@ export async function fetchAllPosts(): Promise<Post[]> {
   return Array.isArray(data.data) ? data.data : [];
 }
 
-// --- CREATE NEW POST ---
+/**
+ * Creates a new post on the API.
+ * @async
+ * @param {string} title - The title of the post.
+ * @param {string} body - The content/body of the post.
+ * @param {string} [imageUrl] - Optional image URL for the post.
+ * @returns {Promise<Post>} The created post object.
+ * @throws {Error} Throws an error if creation fails or token is missing.
+ */
 export async function createPost(
   title: string,
   body: string,
@@ -57,7 +70,13 @@ export async function createPost(
   return data.data ?? data;
 }
 
-// --- DELETE POST ---
+/**
+ * Deletes a post by its ID.
+ * @async
+ * @param {string} postId - The ID of the post to delete.
+ * @returns {Promise<void>}
+ * @throws {Error} Throws an error if the token is missing or deletion fails.
+ */
 export async function deletePost(postId: string): Promise<void> {
   const token = getToken();
   if (!token) throw new Error("No auth token found.");
