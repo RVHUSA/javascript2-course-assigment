@@ -27,11 +27,11 @@ document.addEventListener("DOMContentLoaded", async () => {
   const cancelBtn = document.querySelector<HTMLButtonElement>("#cancelBtn");
 
   if (!titleInput || !bodyInput || !imageInput || !form || !cancelBtn) {
-    console.error(" Missing form elements in edit.html");
+    console.error("Missing form elements in edit.html");
     return;
   }
 
-  // Fetch the existing post
+  // --- Fetch existing post ---
   try {
     const response = await fetch(`${SOCIAL_URL}/posts/${postId}`, {
       headers: {
@@ -39,8 +39,6 @@ document.addEventListener("DOMContentLoaded", async () => {
         "X-Noroff-API-Key": API_KEY,
       },
     });
-
-    console.log("Fetching post:", response.status);
 
     if (!response.ok) {
       const errorData = await response.json();
@@ -52,20 +50,17 @@ document.addEventListener("DOMContentLoaded", async () => {
     const data = await response.json();
     const post: Post = data.data ?? data;
 
-    console.log("Loaded post data:", post);
-
-    // Fill in form fields 
+    // --- Fill in form fields ---
     titleInput.value = post.title ?? "";
     bodyInput.value = post.body ?? "";
-    imageInput.value = post.media?.url ?? "";
-
+    imageInput.value = post.media?.[0]?.url ?? ""; 
   } catch (error) {
     console.error("Error fetching post:", error);
     alert("Could not load post details.");
     return;
   }
 
-  // Handle form submission (update post)
+  // --- Handle form submission (update post) ---
   form.addEventListener("submit", async (e: SubmitEvent) => {
     e.preventDefault();
 
@@ -73,11 +68,9 @@ document.addEventListener("DOMContentLoaded", async () => {
       title: titleInput.value.trim(),
       body: bodyInput.value.trim(),
       media: imageInput.value.trim()
-        ? { url: imageInput.value.trim(), alt: titleInput.value.trim() }
+        ? [{ url: imageInput.value.trim(), alt: titleInput.value.trim() }] 
         : undefined,
     };
-
-    console.log("Updating post:", updatedPost);
 
     try {
       const response = await fetch(`${SOCIAL_URL}/posts/${postId}`, {

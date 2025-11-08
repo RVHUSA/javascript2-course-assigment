@@ -62,7 +62,7 @@ export async function createPost(title: string, body: string, imageUrl?: string)
   if (!token) throw new Error("No auth token found. Please log in.");
 
   const postData: any = { title, body };
-  if (imageUrl) postData.media = { url: imageUrl, alt: title };
+  if (imageUrl) postData.media = [{ url: imageUrl, alt: title }];
 
   const response = await fetch(`${SOCIAL_URL}/posts`, {
     method: "POST",
@@ -98,46 +98,43 @@ export function renderPosts(posts: Post[], container: HTMLDivElement) {
 
     const ownerName = post.owner?.name ?? "You";
     const createdDate = post.created ?? post.published ?? "";
-    const mediaHTML = post.media?.url
-      ? `<img src="${post.media.url}" alt="${post.media.alt ?? "Post image"}" class="post-image">`
+
+    const mediaHTML = post.media?.[0]?.url
+      ? `<img src="${post.media[0].url}" alt="${post.media[0].alt ?? "Post image"}" class="post-image">`
       : "";
 
     card.innerHTML = `
-    <a href="/post.html?id=${post.id}" class="post-link">
-    <h2>${post.title}</h2>
-    ${mediaHTML}
-    </a>
-    <p>${post.body}</p>
-    <small>By ${ownerName}</small>
-    <small>${createdDate ? `Created: ${new Date(createdDate).toLocaleString()}` : ""}</small>
-    <div class="post-actions">
-      <button class="edit-btn" data-id="${post.id}"> Edit</button>
-      <button class="delete-btn" data-id="${post.id}"> Delete</button>
-    </div>
-  `;
+      <a href="/post.html?id=${post.id}" class="post-link">
+        <h2>${post.title}</h2>
+        ${mediaHTML}
+      </a>
+      <p>${post.body}</p>
+      <small>By ${ownerName}</small>
+      <small>${createdDate ? `Created: ${new Date(createdDate).toLocaleString()}` : ""}</small>
+      <div class="post-actions">
+        <button class="edit-btn" data-id="${post.id}">Edit</button>
+        <button class="delete-btn" data-id="${post.id}">Delete</button>
+      </div>
+    `;
 
     container.appendChild(card);
   });
 
-  // Event Listeners for buttons
+  // --- EVENT LISTENERS FOR BUTTONS ---
   const editButtons = container.querySelectorAll(".edit-btn");
   const deleteButtons = container.querySelectorAll(".delete-btn");
 
   editButtons.forEach((btn) => {
     btn.addEventListener("click", (e) => {
       const id = (e.target as HTMLButtonElement).dataset.id;
-      if (id) {
-        window.location.href = `/edit.html?id=${id}`;
-      }
+      if (id) window.location.href = `/edit.html?id=${id}`;
     });
   });
 
   deleteButtons.forEach((btn) => {
     btn.addEventListener("click", async (e) => {
       const id = (e.target as HTMLButtonElement).dataset.id;
-      if (id) {
-        await deletePost(id);
-      }
+      if (id) await deletePost(id);
     });
   });
 }

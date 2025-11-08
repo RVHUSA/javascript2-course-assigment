@@ -29,20 +29,20 @@ document.addEventListener("DOMContentLoaded", async () => {
     const data = await response.json();
     const post: Post = data.data ?? data;
 
-    // Show post
+    // --- SHOW POST ---
+    const mediaHTML = post.media?.[0]?.url
+      ? `<img src="${post.media[0].url}" alt="${post.media[0].alt ?? post.title}">`
+      : "";
+
     postContainer.innerHTML = `
       <article class="post">
         <h2>${post.title}</h2>
-        ${
-          post.media?.url
-            ? `<img src="${post.media.url}" alt="${post.media.alt || post.title}">`
-            : ""
-        }
+        ${mediaHTML}
         <p>${post.body}</p>
       </article>
     `;
 
-    // Show buttons if user are logged in
+    // --- SHOW BUTTONS IF USER IS LOGGED IN ---
     if (token) {
       postActions.classList.remove("hidden");
 
