@@ -70,10 +70,9 @@ To run this project on your own computer:
 
 - [x] Registration and login  
 - [x] CRUD operations for posts  
-- [x] Profile view and edit  
+- [x] Profile view
 - [x] Follow/unfollow functionality  
 - [x] Search users  
-- [x] Responsive design  
 - [x] Deployed to Netlify  
 - [x] ES6 modules and TypeScript used  
 - [x] Prettier formatting  
