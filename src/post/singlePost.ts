@@ -29,20 +29,27 @@ document.addEventListener("DOMContentLoaded", async () => {
     const data = await response.json();
     const post: Post = data.data ?? data;
 
-    // --- SHOW POST ---
+    // --- Show post ---
+    let imageHTML = "";
+    if (Array.isArray(post.media)) {
+      imageHTML = post.media
+        .map(
+          (m) => `<img src="${m.url}" alt="${m.alt || post.title}" class="post-image">`
+        )
+        .join("");
+    } else if (post.media && "url" in post.media) {
+      imageHTML = `<img src="${post.media.url}" alt="${post.media.alt || post.title}" class="post-image">`;
+    }
+
     postContainer.innerHTML = `
       <article class="post">
         <h2>${post.title}</h2>
-        ${
-          post.media?.url
-            ? `<img src="${post.media.url}" alt="${post.media.alt || post.title}">`
-            : ""
-        }
+        ${imageHTML}
         <p>${post.body}</p>
       </article>
     `;
 
-    // --- SHOW BUTTONS IF USER IS LOGGED IN ---
+    // Show buttons for user
     if (token) {
       postActions.classList.remove("hidden");
 

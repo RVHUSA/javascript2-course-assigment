@@ -27,7 +27,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   const cancelBtn = document.querySelector<HTMLButtonElement>("#cancelBtn");
 
   if (!titleInput || !bodyInput || !imageInput || !form || !cancelBtn) {
-    console.error(" Missing form elements in edit.html");
+    console.error("Missing form elements in edit.html");
     return;
   }
 
@@ -50,10 +50,17 @@ document.addEventListener("DOMContentLoaded", async () => {
     const data = await response.json();
     const post: Post = data.data ?? data;
 
-    // --- Fill in form fields ---
+    // Media = array/object
+    let mediaUrl = "";
+    if (Array.isArray(post.media) && post.media.length > 0) {
+      mediaUrl = post.media[0].url;
+    } else if (post.media && "url" in post.media) {
+      mediaUrl = post.media.url;
+    }
+
     titleInput.value = post.title ?? "";
     bodyInput.value = post.body ?? "";
-    imageInput.value = post.media?.url ?? "";
+    imageInput.value = mediaUrl ?? "";
 
   } catch (error) {
     console.error("Error fetching post:", error);
@@ -61,15 +68,16 @@ document.addEventListener("DOMContentLoaded", async () => {
     return;
   }
 
-  // --- Handle form submission (update post) ---
+  // Update post
   form.addEventListener("submit", async (e: SubmitEvent) => {
     e.preventDefault();
 
-    const updatedPost = {
+    const mediaUrl = imageInput.value.trim();
+    const updatedPost: Partial<Post> = {
       title: titleInput.value.trim(),
       body: bodyInput.value.trim(),
-      media: imageInput.value.trim()
-        ? { url: imageInput.value.trim(), alt: titleInput.value.trim() }
+      media: mediaUrl
+        ? [{ url: mediaUrl, alt: titleInput.value.trim() }]
         : undefined,
     };
 

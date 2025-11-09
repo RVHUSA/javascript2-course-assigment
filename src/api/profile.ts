@@ -71,7 +71,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     statsContainer.append(postsStat, followersStat, followingStat);
     profileNameEl.insertAdjacentElement("afterend", statsContainer);
 
-    // --- Follow/Unfollow button ---
+    // --- Follow/Unfollow ---
     if (profile.name !== currentUser?.name) {
       followBtn.classList.remove("hidden");
 
@@ -100,7 +100,6 @@ document.addEventListener("DOMContentLoaded", async () => {
             return;
           }
 
-          // Profile update after handeling
           const updatedRes = await fetch(
             `${SOCIAL_URL}/profiles/${profileName}?_followers=true&_following=true`,
             {
@@ -113,8 +112,10 @@ document.addEventListener("DOMContentLoaded", async () => {
 
           const updatedProfile = (await updatedRes.json()).data;
 
-          followersStat.querySelector("strong")!.textContent = updatedProfile.followers?.length ?? "0";
-          followingStat.querySelector("strong")!.textContent = updatedProfile.following?.length ?? "0";
+          followersStat.querySelector("strong")!.textContent =
+            updatedProfile.followers?.length ?? "0";
+          followingStat.querySelector("strong")!.textContent =
+            updatedProfile.following?.length ?? "0";
 
           isFollowing = updatedProfile.followers?.some(
             (f: any) => f.name === currentUser?.name
@@ -136,10 +137,17 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
 
     posts.forEach((post) => {
+      let imageHTML = "";
+      if (Array.isArray(post.media) && post.media.length > 0) {
+        imageHTML = `<img src="${post.media[0].url}" alt="${post.media[0].alt || post.title}">`;
+      } else if (post.media && "url" in post.media) {
+        imageHTML = `<img src="${post.media.url}" alt="${post.media.alt || post.title}">`;
+      }
+
       const card = document.createElement("div");
       card.className = "post-card";
       card.innerHTML = `
-        ${post.media?.url ? `<img src="${post.media.url}" alt="${post.media.alt || post.title}">` : ""}
+        ${imageHTML}
         <h4>${post.title}</h4>
         <p>${post.body}</p>
       `;

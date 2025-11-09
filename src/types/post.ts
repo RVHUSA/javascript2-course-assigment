@@ -1,8 +1,13 @@
 export interface User {
   id: string;
   name: string;
-  email?: string; 
-  avatar?: string;
+  email?: string;
+  avatar?: { url: string };
+}
+
+export interface MediaItem {
+  url: string;
+  alt?: string;
 }
 
 export interface Post {
@@ -12,9 +17,5 @@ export interface Post {
   owner: User;
   published?: string;
   created?: string;
-  media?: {
-    url: string;
-    alt?: string;
-  };
-
+  media?: MediaItem | MediaItem[] | null;
 }
