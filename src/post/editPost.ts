@@ -27,7 +27,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   const cancelBtn = document.querySelector<HTMLButtonElement>("#cancelBtn");
 
   if (!titleInput || !bodyInput || !imageInput || !form || !cancelBtn) {
-    console.error("Missing form elements in edit.html");
+    console.error(" Missing form elements in edit.html");
     return;
   }
 
@@ -53,7 +53,8 @@ document.addEventListener("DOMContentLoaded", async () => {
     // --- Fill in form fields ---
     titleInput.value = post.title ?? "";
     bodyInput.value = post.body ?? "";
-    imageInput.value = post.media?.[0]?.url ?? ""; 
+    imageInput.value = post.media?.url ?? "";
+
   } catch (error) {
     console.error("Error fetching post:", error);
     alert("Could not load post details.");
@@ -68,7 +69,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       title: titleInput.value.trim(),
       body: bodyInput.value.trim(),
       media: imageInput.value.trim()
-        ? [{ url: imageInput.value.trim(), alt: titleInput.value.trim() }] 
+        ? { url: imageInput.value.trim(), alt: titleInput.value.trim() }
         : undefined,
     };
 

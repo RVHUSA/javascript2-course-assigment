@@ -139,7 +139,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       const card = document.createElement("div");
       card.className = "post-card";
       card.innerHTML = `
-      ${post.media?.[0]?.url ? `<img src="${post.media[0].url}" alt="${post.media[0].alt || post.title}">` : ""}
+        ${post.media?.url ? `<img src="${post.media.url}" alt="${post.media.alt || post.title}">` : ""}
         <h4>${post.title}</h4>
         <p>${post.body}</p>
       `;

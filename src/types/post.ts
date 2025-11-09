@@ -9,7 +9,12 @@ export interface Post {
   id?: string;
   title: string;
   body: string;
-  owner?: User;  
+  owner: User;
   published?: string;
   created?: string;
+  media?: {
+    url: string;
+    alt?: string;
+  };
+
 }

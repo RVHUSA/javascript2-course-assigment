@@ -30,14 +30,14 @@ document.addEventListener("DOMContentLoaded", async () => {
     const post: Post = data.data ?? data;
 
     // --- SHOW POST ---
-    const mediaHTML = post.media?.[0]?.url
-      ? `<img src="${post.media[0].url}" alt="${post.media[0].alt ?? post.title}">`
-      : "";
-
     postContainer.innerHTML = `
       <article class="post">
         <h2>${post.title}</h2>
-        ${mediaHTML}
+        ${
+          post.media?.url
+            ? `<img src="${post.media.url}" alt="${post.media.alt || post.title}">`
+            : ""
+        }
         <p>${post.body}</p>
       </article>
     `;
