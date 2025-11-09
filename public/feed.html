@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>My Posts</title>
-  <link rel="stylesheet" href="../css/style.css">
-  <link rel="stylesheet" href="../css/feed.css">
-  <link rel="stylesheet" href="../css/post.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Social Feed</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/feed.css">
+  <link rel="stylesheet" href="/css/post.css">
 </head>
 <body>
   <header>
@@ -27,8 +27,12 @@
       <input type="text" id="imageUrl" placeholder="Image URL (optional)">
       <button type="submit">Create Post</button>
     </form>
+    <div class="search-bar">
+      <input type="text" id="profileSearch" placeholder="Search profiles...">
+      <button id="searchBtn">Search</button>
+    </div>
     <div id="feedContainer" class="feed-container"></div>
   </main>
-  <script type="module" src="../post/myPosts.ts"></script>
+  <script type="module" src="../src/main-feed.ts"></script>
 </body>
 </html>

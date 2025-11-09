@@ -1,20 +1,20 @@
 import { defineConfig } from "vite";
-import { resolve } from "path";
 
 export default defineConfig({
-  root: "src",       
+  root: "./",
   build: {
-    outDir: "../dist", 
+    outDir: "dist",
     rollupOptions: {
       input: {
-        login: resolve(__dirname, "src/html/login.html"),
-        register: resolve(__dirname, "src/html/register.html"),
-        feed: resolve(__dirname, "src/html/feed.html"),
-        profile: resolve(__dirname, "src/html/profile.html"),
-        post: resolve(__dirname, "src/html/post.html"),
-        myPosts: resolve(__dirname, "src/html/myPosts.html"),
-        edit: resolve(__dirname, "src/html/edit.html"),
-      },
-    },
-  },
+        main: "public/index.html",
+        feed: "public/feed.html",
+        login: "public/login.html",
+        register: "public/register.html",
+        profile: "public/profile.html",
+        post: "public/post.html",
+        edit: "public/edit.html",
+        myPosts: "public/myPosts.html"
+      }
+    }
+  }
 });
