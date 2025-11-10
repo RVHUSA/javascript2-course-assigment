@@ -130,7 +130,7 @@ export function renderPosts(posts: Post[], container: HTMLDivElement): void {
         <p>${post.body}</p>
       </div>
       <small>
-        By <a href="/profile.html?name=${ownerName}" class="author-link">${ownerName}</a>
+        By <a href="/html/profile.html?name=${ownerName}" class="author-link">${ownerName}</a>
       </small><br>
       <small>
         ${
