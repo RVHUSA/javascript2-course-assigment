@@ -9,6 +9,7 @@ if (!token) {
   window.location.href = "/html/login.html"; 
 }
 
+// --- ELEMENT REFERENCES ---
 const feedContainer = document.getElementById("feedContainer") as HTMLDivElement | null;
 const postForm = document.getElementById("postForm") as HTMLFormElement | null;
 const titleInput = document.getElementById("title") as HTMLInputElement | null;
@@ -16,9 +17,10 @@ const bodyInput = document.getElementById("body") as HTMLTextAreaElement | null;
 const imageInput = document.getElementById("imageUrl") as HTMLInputElement | null;
 
 // --- SEARCH ELEMENTS ---
-const searchInput = document.getElementById("profileSearch") as HTMLInputElement | null;
+const searchInput = document.getElementById("postSearch") as HTMLInputElement | null;
 const searchBtn = document.getElementById("searchBtn") as HTMLButtonElement | null;
 
+// --- LOAD AND RENDER FEED ---
 async function loadAndRenderFeed() {
   if (!feedContainer) return;
 
@@ -48,6 +50,7 @@ if (postForm && titleInput && bodyInput && feedContainer) {
       postForm.reset();
     } catch (err) {
       console.error(err);
+      alert("Failed to create post. Try again.");
     }
   });
 }
@@ -65,14 +68,22 @@ if (feedContainer) {
     }
 
     if (target.classList.contains("delete-btn")) {
-      await deletePost(id);
-      const card = target.closest(".post-card");
-      if (card) card.remove();
+      const confirmDelete = confirm("Are you sure you want to delete this post?");
+      if (!confirmDelete) return;
+
+      try {
+        await deletePost(id);
+        const card = target.closest(".post-card");
+        if (card) card.remove();
+      } catch (err) {
+        console.error(err);
+        alert("Failed to delete post. Try again.");
+      }
     }
   });
 }
 
-// --- SEARCH PROFILES ---
+// --- SEARCH POSTS ---
 if (searchInput && searchBtn && feedContainer) {
   searchBtn.addEventListener("click", async (e) => {
     e.preventDefault();
@@ -80,38 +91,28 @@ if (searchInput && searchBtn && feedContainer) {
     if (!query) return;
 
     try {
-      const res = await fetch(`${SOCIAL_URL}/profiles/search?q=${encodeURIComponent(query)}`, {
+      const res = await fetch(`${SOCIAL_URL}/posts/search?q=${encodeURIComponent(query)}`, {
         headers: {
           Authorization: `Bearer ${token}`,
           "X-Noroff-API-Key": API_KEY,
         },
       });
 
-      if (!res.ok) throw new Error("Failed to search profiles");
+      if (!res.ok) throw new Error("Failed to search posts");
 
       const data = await res.json();
-      const profiles = data.data;
+      const posts = data.data ?? [];
 
       feedContainer.innerHTML = "";
 
-      if (profiles.length === 0) {
-        feedContainer.innerHTML = "<p>No profiles found.</p>";
+      if (posts.length === 0) {
+        feedContainer.innerHTML = "<p>No posts found.</p>";
         return;
       }
 
-      profiles.forEach((profile: any) => {
-        const card = document.createElement("div");
-        card.className = "profile-card";
-        card.innerHTML = `
-          <img src="${profile.avatar?.url}" alt="${profile.name}" class="avatar">
-          <h3>${profile.name}</h3>
-          <p>${profile.bio || ""}</p>
-        `;
-        card.addEventListener("click", () => {
-          window.location.href = `/html/profile.html?name=${profile.name}`;
-        });
-        feedContainer.appendChild(card);
-      });
+      // Render posts
+      renderPosts(posts, feedContainer);
+
     } catch (err) {
       console.error(err);
       feedContainer.innerHTML = "<p style='color:red'>Search failed. Try again.</p>";
@@ -119,4 +120,5 @@ if (searchInput && searchBtn && feedContainer) {
   });
 }
 
+// --- INITIAL LOAD ---
 document.addEventListener("DOMContentLoaded", loadAndRenderFeed);
