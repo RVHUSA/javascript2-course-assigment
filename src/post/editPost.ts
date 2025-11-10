@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   if (!token) {
     alert("You must be logged in to edit a post.");
-    window.location.href = "/account/login.html";
+    window.location.href = "/html/login.html";
     return;
   }
 
@@ -16,7 +16,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   if (!postId) {
     alert("No post ID provided.");
-    window.location.href = "/myPosts.html";
+    window.location.href = "/html/feed.html";
     return;
   }
 
@@ -99,7 +99,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       }
 
       alert("Post updated successfully!");
-      window.location.href = "/feed.html";
+      window.location.href = "/html/feed.html";
     } catch (error) {
       console.error("Error updating post:", error);
       alert("Could not update post. Please try again.");
@@ -107,6 +107,6 @@ document.addEventListener("DOMContentLoaded", async () => {
   });
 
   cancelBtn.addEventListener("click", () => {
-    window.location.href = "/feed.html";
+    window.location.href = "/html/feed.html";
   });
 });
