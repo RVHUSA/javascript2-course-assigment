@@ -144,7 +144,7 @@ export function renderPosts(posts: Post[], container: HTMLDivElement): void {
     card.addEventListener("click", (event) => {
       const target = event.target as HTMLElement;
       if (target.closest(".author-link")) return;
-      window.location.href = `/post.html?id=${post.id}`;
+      window.location.href = `/html/post.html?id=${post.id}`;
     });
 
     if (currentUser && (post as any).owner?.id === currentUser.id) {

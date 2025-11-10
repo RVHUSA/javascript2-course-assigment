@@ -11,7 +11,7 @@ if (loginForm) {
 
     try {
       await login(email, password);
-      window.location.href = "/feed.html"; 
+      window.location.href = "/html/feed.html"; 
     } catch (error) {
       const errorMsg = document.createElement("p");
       errorMsg.style.color = "red";
@@ -34,7 +34,7 @@ if (registerForm) {
 
     try {
       await register(name, email, password);
-      window.location.href = "/login.html"; 
+      window.location.href = "/html/login.html"; 
     } catch (error) {
       const errorMsg = document.createElement("p");
       errorMsg.style.color = "red";

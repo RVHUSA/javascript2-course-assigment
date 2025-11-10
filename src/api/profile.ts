@@ -153,7 +153,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       `;
 
       card.addEventListener("click", () => {
-        window.location.href = `/post.html?id=${post.id}`;
+        window.location.href = `/html/post.html?id=${post.id}`;
       });
 
       postsContainer.appendChild(card);

@@ -54,7 +54,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       postActions.classList.remove("hidden");
 
       editBtn.addEventListener("click", () => {
-        window.location.href = `/edit.html?id=${postId}`;
+        window.location.href = `/html/edit.html?id=${postId}`;
       });
 
       deleteBtn.addEventListener("click", async () => {
@@ -73,7 +73,7 @@ document.addEventListener("DOMContentLoaded", async () => {
           if (!delResponse.ok) throw new Error("Failed to delete post.");
 
           alert("Post deleted successfully.");
-          window.location.href = "/feed.html";
+          window.location.href = "/html/feed.html";
         } catch (error) {
           console.error("Error deleting post:", error);
           alert("Could not delete post. Try again.");

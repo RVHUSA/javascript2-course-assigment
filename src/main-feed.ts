@@ -6,7 +6,7 @@ import { SOCIAL_URL, API_KEY } from "./api/config";
 const token = getToken();
 if (!token) {
   console.warn("No token found. Redirecting to login...");
-  window.location.href = "./login.html"; 
+  window.location.href = "/html/login.html"; 
 }
 
 const feedContainer = document.getElementById("feedContainer") as HTMLDivElement | null;
@@ -61,7 +61,7 @@ if (feedContainer) {
     const id = target.dataset.id;
 
     if (target.classList.contains("edit-btn")) {
-      window.location.href = `/edit.html?id=${id}`;
+      window.location.href = `/html/edit.html?id=${id}`;
     }
 
     if (target.classList.contains("delete-btn")) {
@@ -108,7 +108,7 @@ if (searchInput && searchBtn && feedContainer) {
           <p>${profile.bio || ""}</p>
         `;
         card.addEventListener("click", () => {
-          window.location.href = `/profile.html?name=${profile.name}`;
+          window.location.href = `/html/profile.html?name=${profile.name}`;
         });
         feedContainer.appendChild(card);
       });
