@@ -1,5 +1,6 @@
 import { defineConfig } from "vite";
 import { resolve } from "path";
+import { copyFileSync } from "fs";
 
 export default defineConfig({
   root: "src",
@@ -17,4 +18,12 @@ export default defineConfig({
       },
     },
   },
+  plugins: [
+    {
+      name: "copy-feed-to-index",
+      closeBundle() {
+                copyFileSync("dist/html/feed.html", "dist/index.html");
+      },
+    },
+  ],
 });
