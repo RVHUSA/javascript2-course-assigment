@@ -49,7 +49,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       </article>
     `;
 
-    // Show buttons for user
+    // --- Show buttons for user ---
     if (token) {
       postActions.classList.remove("hidden");
 

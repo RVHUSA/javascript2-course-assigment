@@ -110,7 +110,6 @@ if (searchInput && searchBtn && feedContainer) {
         return;
       }
 
-      // Render posts
       renderPosts(posts, feedContainer);
 
     } catch (err) {
