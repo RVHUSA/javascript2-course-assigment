@@ -50,11 +50,9 @@ document.addEventListener("DOMContentLoaded", async () => {
     const data = await response.json();
     const post: Post = data.data ?? data;
 
-    // Media = array/object
+    // --- Media = array/object ---
     let mediaUrl = "";
-    if (Array.isArray(post.media) && post.media.length > 0) {
-      mediaUrl = post.media[0].url;
-    } else if (post.media && "url" in post.media) {
+    if (post.media && "url" in post.media) {
       mediaUrl = post.media.url;
     }
 
@@ -68,18 +66,19 @@ document.addEventListener("DOMContentLoaded", async () => {
     return;
   }
 
-  // Update post
+  // --- Update post ---
   form.addEventListener("submit", async (e: SubmitEvent) => {
     e.preventDefault();
 
     const mediaUrl = imageInput.value.trim();
-    const updatedPost: Partial<Post> = {
+    const updatedPost: Record<string, any> = {
       title: titleInput.value.trim(),
       body: bodyInput.value.trim(),
-      media: mediaUrl
-        ? [{ url: mediaUrl, alt: titleInput.value.trim() }]
-        : undefined,
     };
+
+    if (mediaUrl) {
+      updatedPost.media = { url: mediaUrl, alt: titleInput.value.trim() };
+    }
 
     try {
       const response = await fetch(`${SOCIAL_URL}/posts/${postId}`, {
