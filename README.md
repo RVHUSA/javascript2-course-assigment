@@ -9,7 +9,7 @@ Users can register, log in, view all posts, create, edit and delete their own po
 
 ## 🚀 Live Demo
 
-🔗 **Deployed site:** https://mysocial.netlify.app 
+🔗 **Deployed site:** https://javascript2ca.netlify.app/
 
 💻 **GitHub repository:** https://github.com/RVHUSA/javascript2-course-assigment.git
 
