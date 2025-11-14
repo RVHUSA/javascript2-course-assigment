@@ -22,12 +22,12 @@ Users can register, log in, view all posts, create, edit and delete their own po
 | 🧍 Register | Users can register a new account via the API |
 | 🔐 Login | Users can log in and store their auth token in localStorage |
 | 📰 View all posts | Displays all posts on the main feed page |
-| ✍️ Create post | Users can create their own posts with optional image |
+| ✍️ Create post | Users can create their own posts |
 | ✏️ Edit post | Users can edit their own posts |
 | ❌ Delete post | Users can delete their own posts |
 | 👤 View profile | View any user's profile with avatar, bio, and stats |
 | ➕ Follow / Unfollow | Follow or unfollow other users |
-| 🔍 Search profiles | Search for users using a search bar |
+| 🔍 Search posts | Search for posts using a search bar |
 | 🧾 View user posts | Displays all posts made by a specific user |
 
 ---
@@ -64,18 +64,7 @@ To run this project on your own computer:
 - **Build tool:** [Vite](https://vitejs.dev/)  
 - **Deployment:** Netlify  
 
----
 
-## ✅ Requirements fulfilled
-
-- [x] Registration and login  
-- [x] CRUD operations for posts  
-- [x] Profile view
-- [x] Follow/unfollow functionality  
-- [x] Search users  
-- [x] Deployed to Netlify  
-- [x] ES6 modules and TypeScript used  
-- [x] Prettier formatting  
 
 
 
