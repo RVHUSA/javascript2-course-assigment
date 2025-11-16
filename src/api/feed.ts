@@ -77,12 +77,12 @@ export async function createPost(
  * @returns {Promise<void>}
  * @throws {Error} Throws an error if the token is missing or deletion fails.
  */
-export async function deletePost(postId: string): Promise<void> {
+export async function deletePost(postId: string): Promise<boolean> {
   const token = getToken();
   if (!token) throw new Error("No auth token found.");
 
   const confirmed = confirm("Are you sure you want to delete this post?");
-  if (!confirmed) return;
+  if (!confirmed) return false;
 
   const response = await fetch(`${SOCIAL_URL}/posts/${postId}`, {
     method: "DELETE",
@@ -93,7 +93,8 @@ export async function deletePost(postId: string): Promise<void> {
   });
 
   if (!response.ok) throw new Error("Failed to delete post.");
-  alert("Post deleted successfully!");
+
+  return true;
 }
 
 // --- RENDER POSTS ---
