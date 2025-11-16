@@ -14,7 +14,15 @@ interface LoginResponse {
   email?: string;
 }
 
-// --- LOGIN ---
+/**
+ * Logs in a user and stores token + user info in localStorage.
+ *
+ * @async
+ * @param {string} email - User email
+ * @param {string} password - User password
+ * @returns {Promise<void>}
+ * @throws {Error} If login fails or no token is returned
+ */
 export async function login(email: string, password: string) {
   const response = await fetch(`${AUTH_URL}/login`, {
     method: "POST",
@@ -46,7 +54,16 @@ export async function login(email: string, password: string) {
   saveUser({ id: id || "unknown", name: name || "Unknown", email: emailRes || email });
 }
 
-// --- REGISTER ---
+/**
+ * Registers a new user.
+ *
+ * @async
+ * @param {string} name - Full name of the user
+ * @param {string} email - Email of the user
+ * @param {string} password - Password
+ * @returns {Promise<any>} 
+ * @throws {Error} If registration fails
+ */
 export async function register(name: string, email: string, password: string) {
   const response = await fetch(`${AUTH_URL}/register`, {
     method: "POST",
