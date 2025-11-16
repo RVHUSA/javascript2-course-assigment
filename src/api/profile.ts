@@ -21,10 +21,9 @@ document.addEventListener("DOMContentLoaded", async () => {
     return;
   }
 
-  try {
-    // --- GET profile info ---
-    const profileResponse = await fetch(
-      `${SOCIAL_URL}/profiles/${profileName}?_followers=true&_following=true`,
+  async function fetchProfile(name: string) {
+    const response = await fetch(
+      `${SOCIAL_URL}/profiles/${name}?_followers=true&_following=true`,
       {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -33,9 +32,17 @@ document.addEventListener("DOMContentLoaded", async () => {
       }
     );
 
-    if (!profileResponse.ok) throw new Error("Failed to load profile");
-    const profileData = await profileResponse.json();
-    const profile = profileData.data;
+    if (!response.ok) {
+      const err = await response.json();
+      throw new Error(err.errors?.[0]?.message || "Failed to load profile");
+    }
+
+    return (await response.json()).data;
+  }
+
+  try {
+    // --- GET profile info ---
+    const profile = await fetchProfile(profileName);
 
     // --- GET users post---
     const postsResponse = await fetch(`${SOCIAL_URL}/profiles/${profileName}/posts`, {
@@ -100,17 +107,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             return;
           }
 
-          const updatedRes = await fetch(
-            `${SOCIAL_URL}/profiles/${profileName}?_followers=true&_following=true`,
-            {
-              headers: {
-                Authorization: `Bearer ${token}`,
-                "X-Noroff-API-Key": API_KEY,
-              },
-            }
-          );
-
-          const updatedProfile = (await updatedRes.json()).data;
+          const updatedProfile = await fetchProfile(profileName);
 
           followersStat.querySelector("strong")!.textContent =
             updatedProfile.followers?.length ?? "0";
